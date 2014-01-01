@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html>
+<script src='https://threejs.fruitopology.com/build/three.min.js'></script>
+<script src='https://threejs.fruitopology.com/examples/js/controls/OrbitControls.js'></script>
+<script src='./js/threex.atmospherematerial.js'></script>
+<script src='./js/SolarSystem.js'></script>
+<script src='./js/Sun.js'></script>
+<script src='./js/Mercury.js'></script>
+<script src='./js/Venus.js'></script>
+<script src='./js/Earth.js'></script>
+<script src='./js/Mars.js'></script>
+<script src='./js/Jupiter.js'></script>
+<script src='./js/Saturn.js'></script>
+<script src='./js/Uranus.js'></script>
+<script src='./js/Neptune.js'></script>
+<script src='./js/Pluto.js'></script>
+<link rel="stylesheet" type="text/css" href="./css/main.css">
+
+<body>
+    <audio controls>
+        <source src="horse.ogg" type="audio/ogg" />
+        <source src="horse.mp3" type="audio/mpeg" />
+        Your browser does not support the audio element.
+    </audio>
+    <ul id="viewPoints">
+        <h1>ViewPoints</h1>
+        <li>
+            <button onclick="changeViewPoint(solarSystem.sun);orbit.offset.z = 151;">Sun</button>
+        </li>
+        <li>
+            <button onclick="changeViewPoint(solarSystem.mercury);orbit.offset.z = 11;">Mercury</button>
+        </li>
+        <li>
+            <button onclick="changeViewPoint(solarSystem.venus);orbit.offset.z = 11;">Venus</button>
+        </li>
+        <li>
+            <button onclick="changeViewPoint(solarSystem.earth);orbit.offset.z = 11;">Mother Earth</button>
+        </li>
+        <li>
+            <button onclick="changeViewPoint(solarSystem.mars);orbit.offset.z = 11;">Mars</button>
+        </li>
+        <li>
+            <button onclick="changeViewPoint(solarSystem.jupiter);orbit.offset.z = 31;">Jupiter</button>
+        </li>
+        <li>
+            <button onclick="changeViewPoint(solarSystem.saturn);orbit.offset.z = 27;">Saturn</button>
+        </li>
+        <li>
+            <button onclick="changeViewPoint(solarSystem.uranus);orbit.offset.z = 15;">Uranus</button>
+        </li>
+        <li>
+            <button onclick="changeViewPoint(solarSystem.neptune);orbit.offset.z = 14;">Neptune</button>
+        </li>
+        <li>
+            <button onclick="changeViewPoint(solarSystem.pluto);orbit.offset.z = 3;">Pluto</button>
+        </li>
+    </ul>
+    <ul id="viewTargets">
+        <h1>ViewTargets</h1>
+        <li>
+            <button onclick="changeViewTarget(solarSystem.sun);orbit.offset.z = 151;">Sun</button>
+        </li>
+        <li>
+            <button onclick="changeViewTarget(solarSystem.mercury);orbit.offset.z = 11;">Mercury</button>
+        </li>
+        <li>
+            <button onclick="changeViewTarget(solarSystem.venus);orbit.offset.z = 11;">Venus</button>
+        </li>
+        <li>
+            <button onclick="changeViewTarget(solarSystem.earth);orbit.offset.z = 11;">Mother Earth</button>
+        </li>
+        <li>
+            <button onclick="changeViewTarget(solarSystem.mars);orbit.offset.z = 11;">Mars</button>
+        </li>
+        <li>
+            <button onclick="changeViewTarget(solarSystem.jupiter);orbit.offset.z = 21;">Jupiter</button>
+        </li>
+        <li>
+            <button onclick="changeViewTarget(solarSystem.saturn);orbit.offset.z = 21;">Saturn</button>
+        </li>
+        <li>
+            <button onclick="changeViewTarget(solarSystem.uranus);orbit.offset.z = 15;">Uranus</button>
+        </li>
+        <li>
+            <button onclick="changeViewTarget(solarSystem.neptune);orbit.offset.z = 14;">Neptune</button>
+        </li>
+        <li>
+            <button onclick="changeViewTarget(solarSystem.pluto);orbit.offset.z = 3;">Pluto</button>
+        </li>
+        <li>
+            <p>Camera Offset X</p>
+            <input id="cameraOffsetX"></input>
+        </li>
+        <li>
+            <p>Camera Offset Y</p>
+            <input id="cameraOffsetY"></input>
+        </li>
+        <li>
+            <p>Camera Offset Z</p>
+            <input id="cameraOffsetZ"></input>
+        </li>
+    </ul>
+    <div id='camera_toggle'>
+        <button onclick="orbit.enabled = !orbit.enabled;">Toggle Camera</button>
+    </div>
+</body>
+
+<script>
+function changeViewPoint(planet) {
+    rPlanet = planet.mesh;
+    rTarget = planet.mesh;
+};
+
+function changeViewTarget(planet) {
+    rTarget = planet.mesh;
+};
+
+function onKeyDown(e) {
+    switch (e.keyCode) {
+        case 67:
+            {
+                orbit.enabled = !orbit.enabled;
+                break;
+            }
+        default:
+            {
+                break;
+            }
+    }
+};
+
+function AU2meters(astroUnit) {
+    return 149597870700 * astroUnit;
+};
+var clock = new THREE.Clock();
+var delta = clock.getDelta();
+var screenWidth = window.innerWidth;
+var screenHeight = window.innerHeight;
+var aspect = screenWidth / screenHeight;
+var renderer = new THREE.WebGLRenderer({
+    antialias: true
+});
+renderer.setSize(screenWidth, screenHeight);
+document.body.appendChild(renderer.domElement);
+renderer.shadowMapEnabled = true;
+
+var scene = new THREE.Scene();
+var camera = new THREE.PerspectiveCamera(45, aspect, 0.01, 1500000);
+camera.position.z = 3;
+scene.add(camera);
+var ambientlight = new THREE.AmbientLight(0x888888);
+scene.add(ambientlight);
+
+var starGeometry = new THREE.SphereGeometry(1500000, 128, 128);
+var starMaterial = new THREE.MeshBasicMaterial({
+    map: THREE.ImageUtils.loadTexture('images/galaxy_starfield.png'),
+    side: THREE.BackSide
+})
+var starSphere = new THREE.Mesh(starGeometry, starMaterial);
+scene.add(starSphere);
+
+
+var solarSystem = new SolarSystem(scene);
+var rPlanet = solarSystem.mercury.mesh;
+var rTarget = solarSystem.mercury.mesh;
+var orbit = {
+    enabled: false,
+    offset: {
+        x: 0,
+        y: 0,
+        z: 11
+    }
+};
+var light = new THREE.PointLight(0xcccccc);
+light.intensity = 4;
+light.distance = 45 * solarSystem.AU;
+light.position.set(solarSystem.sun.mesh.position.x, solarSystem.sun.mesh.position.y, solarSystem.sun.mesh.position.z).normalize();
+scene.add(light);
+
+
+window.addEventListener('keydown', onKeyDown, false);
+var controls = new THREE.OrbitControls(camera, renderer.domElement);
+var relativeCameraOffset;
+var cameraOffset;
+
+function animate() {
+    requestAnimationFrame(animate);
+    delta = clock.getDelta;
+    solarSystem.updatePhysics();
+    if (orbit.enabled) {
+        controls.update();
+    } else {
+        relativeCameraOffset = new THREE.Vector3(0, 0, 1);
+        relativeCameraOffset.x = document.getElementById('cameraOffsetX').value || orbit.offset.x;
+        relativeCameraOffset.y = document.getElementById('cameraOffsetY').value || orbit.offset.y;
+        relativeCameraOffset.z = document.getElementById('cameraOffsetZ').value || orbit.offset.z;
+        cameraOffset = relativeCameraOffset.applyMatrix4(rPlanet.matrixWorld);
+        camera.position.copy(cameraOffset);
+        camera.updateMatrix();
+        camera.updateProjectionMatrix();
+    }
+    camera.lookAt(rTarget.position);
+    light.position.copy(solarSystem.sun.mesh.position);
+    renderer.render(scene, camera);
+}
+animate();
+window.onresize = function(e) {
+    var screenWidth = window.innerWidth;
+    var screenHeight = window.innerHeight;
+    renderer.setSize(screenWidth, screenWidth / aspect);
+}
+</script>
+
+</html>

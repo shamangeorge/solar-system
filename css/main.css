@@ -1,0 +1,28 @@
+body {
+    margin: 0px;
+    background-color: #000000;
+    overflow: hidden;
+}
+ul {
+    position:absolute;
+    background-color: transparent;
+}
+ul h1 {
+    color:white;
+    font-size: 15px;
+}
+ul li p {
+    color:white;
+}
+ul#viewPoints {
+    left:0px;
+}
+ul#viewTargets {
+    right:0px;
+    bottom:0px;
+}
+#camera_toggle {
+    position:absolute;
+    left:0px;
+    bottom:0px;
+}
