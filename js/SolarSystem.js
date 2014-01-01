@@ -2,7 +2,7 @@ var THREEx = THREEx || {}
 
 THREEx.Planets = {}
 
-THREEx.Planets.baseURL = '../'
+THREEx.Planets.baseURL = './'
 
 THREEx.Planets._RingGeometry = function(innerRadius, outerRadius, thetaSegments) {
 
