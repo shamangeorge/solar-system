@@ -17,7 +17,7 @@
 <link rel="stylesheet" type="text/css" href="./css/main.css">
 
 <body>
-    <audio autoplay="autoplay" controls>
+    <audio controls>
         <source src="ic342.ogg" type="audio/ogg" />
         <source src="ic342.mp3" type="audio/mpeg" />
         Your browser does not support the audio element.
@@ -25,34 +25,34 @@
     <ul id="viewPoints">
         <h1>ViewPoints</h1>
         <li>
-            <button onclick="changeViewPoint(solarSystem.sun);orbit.offset.z = 151;">Sun</button>
+            <button onclick="changeViewPoint(solarSystem.sun);orbit.offset.z = 31;">Sun</button>
         </li>
         <li>
-            <button onclick="changeViewPoint(solarSystem.mercury);orbit.offset.z = 11;">Mercury</button>
+            <button onclick="changeViewPoint(solarSystem.mercury);orbit.offset.z = 0.5;">Mercury</button>
         </li>
         <li>
-            <button onclick="changeViewPoint(solarSystem.venus);orbit.offset.z = 11;">Venus</button>
+            <button onclick="changeViewPoint(solarSystem.venus);orbit.offset.z = 0.7;">Venus</button>
         </li>
         <li>
-            <button onclick="changeViewPoint(solarSystem.earth);orbit.offset.z = 11;">Mother Earth</button>
+            <button onclick="changeViewPoint(solarSystem.earth);orbit.offset.z = -0.5;">Mother Earth</button>
         </li>
         <li>
-            <button onclick="changeViewPoint(solarSystem.mars);orbit.offset.z = 11;">Mars</button>
+            <button onclick="changeViewPoint(solarSystem.mars);orbit.offset.z = 0.8;">Mars</button>
         </li>
         <li>
-            <button onclick="changeViewPoint(solarSystem.jupiter);orbit.offset.z = 31;">Jupiter</button>
+            <button onclick="changeViewPoint(solarSystem.jupiter);orbit.offset.z = 5;">Jupiter</button>
         </li>
         <li>
-            <button onclick="changeViewPoint(solarSystem.saturn);orbit.offset.z = 27;">Saturn</button>
+            <button onclick="changeViewPoint(solarSystem.saturn);orbit.offset.z = 5;">Saturn</button>
         </li>
         <li>
-            <button onclick="changeViewPoint(solarSystem.uranus);orbit.offset.z = 15;">Uranus</button>
+            <button onclick="changeViewPoint(solarSystem.uranus);orbit.offset.z = 3;">Uranus</button>
         </li>
         <li>
-            <button onclick="changeViewPoint(solarSystem.neptune);orbit.offset.z = 14;">Neptune</button>
+            <button onclick="changeViewPoint(solarSystem.neptune);orbit.offset.z = 3;">Neptune</button>
         </li>
         <li>
-            <button onclick="changeViewPoint(solarSystem.pluto);orbit.offset.z = 3;">Pluto</button>
+            <button onclick="changeViewPoint(solarSystem.pluto);orbit.offset.z = 0.5;">Pluto</button>
         </li>
     </ul>
     <ul id="viewTargets">
@@ -168,7 +168,7 @@ var orbit = {
     offset: {
         x: 0,
         y: 0,
-        z: 11
+        z: 0.5
     }
 };
 var light = new THREE.PointLight(0xcccccc);

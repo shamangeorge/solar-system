@@ -1,6 +1,6 @@
 function Neptune(solarSystem, scene) {
     this.sunRadius = solarSystem.sunRadius || 10;
-    this.adjust = 10000000;
+    this.adjust = 1000000000;
     this.SunRadiusRatio = solarSystem.SunRadiusRatio;
     this.AU = solarSystem.AU;
     this.distanceFromSun = 30.06 * this.AU;

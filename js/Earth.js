@@ -1,6 +1,6 @@
 function Earth(solarSystem, scene) {
     this.sunRadius = solarSystem.sunRadius || 10;
-    this.adjust = 100000;
+    this.adjust = 1000000;
     this.SunRadiusRatio = solarSystem.SunRadiusRatio;
     this.AU = solarSystem.AU;
     this.distanceFromSun = this.AU;

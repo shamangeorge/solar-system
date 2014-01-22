@@ -1,7 +1,7 @@
 function Mercury(solarSystem, scene) {
     this.system = solarSystem;
     this.sunRadius = solarSystem.sunRadius || 10;
-    this.adjust = 10;
+    this.adjust = 100;
     this.SunRadiusRatio = solarSystem.SunRadiusRatio;
     this.AU = solarSystem.AU;
     this.mass = 0.055;
@@ -11,7 +11,7 @@ function Mercury(solarSystem, scene) {
     this.minDistanceFromSun = 0.307 * this.AU;
     this.maxDistanceFromSun = 0.467 * this.AU;
     this.eccentricity = (this.maxDistanceFromSun - this.minDistanceFromSun) / (this.maxDistanceFromSun + this.minDistanceFromSun);
-    this.semiMajorAxis = 2 * (this.minDistanceFromSun + this.maxDistanceFromSun) / 2;
+    this.semiMajorAxis = (this.minDistanceFromSun + this.maxDistanceFromSun) / 2;
     this.semiMinorAxis = Math.sqrt(this.maxDistanceFromSun * this.minDistanceFromSun);
     this.period = 2 * Math.PI * Math.sqrt(Math.pow(this.semiMajorAxis, 3) / this.mew);
     this.orbit = this.addOrbit(this.distanceFromSun);

@@ -1,6 +1,6 @@
 function Uranus(solarSystem, scene) {
     this.sunRadius = solarSystem.sunRadius || 10;
-    this.adjust = 100000;
+    this.adjust = 10000000;
     this.SunRadiusRatio = solarSystem.SunRadiusRatio;
     this.AU = solarSystem.AU;
     this.distanceFromSun = 19.19 * this.AU;

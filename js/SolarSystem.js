@@ -69,9 +69,11 @@ THREEx.Planets._RingGeometry = function(innerRadius, outerRadius, thetaSegments)
 THREEx.Planets._RingGeometry.prototype = Object.create(THREE.Geometry.prototype);
 
 function SolarSystem(scene) {
-    this.sunRadius = 100;
+    this.sunRadius = 10;
     this.SunRadiusRatio = 109.1;
-    this.AU = this.sunRadius + 500;
+    var tmpAdjust = 10;//here because for such distances
+    // distant celestial bodies require extra small floats
+    this.AU = this.sunRadius / 0.00464913034 / tmpAdjust;
     // Gaussian Gravitational Constant
     // in terms of AU, Solar Mass and mean solar day
     // see http://en.wikipedia.org/wiki/Gravitational_constant

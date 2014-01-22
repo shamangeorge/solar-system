@@ -1,6 +1,6 @@
 function Pluto(solarSystem, scene) {
     this.sunRadius = solarSystem.sunRadius || 10;
-    this.adjust = 100000000;
+    this.adjust = Number.MAX_VALUE;
     this.SunRadiusRatio = solarSystem.SunRadiusRatio;
     this.AU = solarSystem.AU;
     this.distanceFromSun = 39.53 * this.AU;
